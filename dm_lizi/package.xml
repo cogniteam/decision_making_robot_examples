@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>dm_lizi</name>
+  <version>1.0.0</version>
+  <description>Wandering algorithm implementation using decision_making tools</description>
+  <maintainer email="igor@cogniteam.com">Igor Makhtes</maintainer>
+  <license>MIT</license>
+  <author email="igor@cogniteam.com">Igor Makhtes</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>decision_making</build_depend>
+  <build_depend>decision_making_parser</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>lizi_description</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <run_depend>decision_making</run_depend>
+  <run_depend>decision_making_parser</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>lizi_description</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+
+  <export>
+  </export>
+
+</package>

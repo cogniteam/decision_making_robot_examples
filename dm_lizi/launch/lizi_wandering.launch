@@ -1,0 +1,7 @@
+<launch>
+    
+    <include file="$(find lizi_description)/launch/lizi.launch" />
+
+    <node name="wandering" pkg="dm_lizi" type="lizi_wandering" />
+
+</launch>
