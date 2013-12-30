@@ -2,6 +2,9 @@
     
     <include file="$(find lizi_description)/launch/lizi.launch" />
 
-    <node name="wandering" pkg="dm_lizi" type="lizi_wandering" />
+    <node name="wandering" pkg="dm_lizi" type="lizi_wandering">
+        <remap from="/cmd_vel" to="/lizi/cmd_vel" />
+        <remap from="/scan" to="/lizi/scan_raw" />
+    </node>
 
 </launch>
