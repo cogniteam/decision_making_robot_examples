@@ -11,7 +11,7 @@ FSM_STATES
     Pause,
     DriveBackward
 }
-FSM_START(Pause);
+FSM_START(TurnRandom);
 FSM_BGN
 {
     FSM_STATE(TurnRandom)

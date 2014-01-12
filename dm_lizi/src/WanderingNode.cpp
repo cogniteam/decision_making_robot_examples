@@ -96,9 +96,9 @@ int countRanges(const sensor_msgs::LaserScan::Ptr& scan, int center, int range, 
 }
 
 void onLaserScan(const sensor_msgs::LaserScan::Ptr scan, EventQueue* q) {
-    int countFrontRange = countRanges(scan, scan->ranges.size() / 2, 100, 0.3);
-    int countRightRange = countRanges(scan, (scan->ranges.size() / 6) * 1, 50, 0.3);
-    int countLeftRange  = countRanges(scan, (scan->ranges.size() / 6) * 5, 50, 0.3);
+    int countFrontRange = countRanges(scan, scan->ranges.size() / 2, 100, 0.5);
+    int countRightRange = countRanges(scan, (scan->ranges.size() / 6) * 1, 50, 0.5);
+    int countLeftRange  = countRanges(scan, (scan->ranges.size() / 6) * 5, 50, 0.5);
 
     bool front = false;
     bool left = false;
@@ -137,7 +137,7 @@ decision_making::TaskResult turnRight(std::string, const decision_making::FSMCal
     if (preemptiveWait(500, 1000, e))
         return decision_making::TaskResult::TERMINATED();
 
-    e.riseEvent("/TIMEOUT_TURN");
+    e.raiseEvent("/TIMEOUT_TURN");
     return decision_making::TaskResult::SUCCESS();
 }
 
@@ -147,7 +147,7 @@ decision_making::TaskResult turnLeft(std::string, const decision_making::FSMCall
     if (preemptiveWait(500, 1000, e))
         return decision_making::TaskResult::TERMINATED();
 
-    e.riseEvent("/TIMEOUT_TURN");
+    e.raiseEvent("/TIMEOUT_TURN");
     return decision_making::TaskResult::SUCCESS();
 }
 
@@ -160,7 +160,7 @@ decision_making::TaskResult turnRandom(std::string, const decision_making::FSMCa
     if (preemptiveWait(500, 2500, e))
         return decision_making::TaskResult::TERMINATED();
 
-    e.riseEvent("/TIMEOUT_TURN");
+    e.raiseEvent("/TIMEOUT_TURN");
     return decision_making::TaskResult::SUCCESS();
 }
 
@@ -170,7 +170,7 @@ decision_making::TaskResult drive(std::string, const decision_making::FSMCallCon
     if (preemptiveWait(9000, 20000, e))
         return decision_making::TaskResult::TERMINATED();
 
-    e.riseEvent("/TIMEOUT_DRIVE");
+    e.raiseEvent("/TIMEOUT_DRIVE");
     return decision_making::TaskResult::SUCCESS();
 }
 
@@ -180,13 +180,15 @@ decision_making::TaskResult driveBackward(std::string, const decision_making::FS
     if (preemptiveWait(1000, 2000, e))
         return decision_making::TaskResult::TERMINATED();
 
-    e.riseEvent("/TIMEOUT_BACKWARD");
+    e.raiseEvent("/TIMEOUT_BACKWARD");
     return decision_making::TaskResult::SUCCESS();
 }
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "wandering_node");
     ros_decision_making_init(argc, argv);
+
+    ROS_INFO("Preparing wandering...");
 
     boost::posix_time::ptime epoch(boost::posix_time::min_date_time);
     boost::posix_time::ptime now(boost::posix_time::microsec_clock::local_time());
@@ -209,7 +211,7 @@ int main(int argc, char **argv) {
 
     ros::AsyncSpinner spinner(1);
     spinner.start();
-
+    ROS_INFO("Spinner started");
     FsmWandering(NULL, q, "Wandering");
 
     delete node;
