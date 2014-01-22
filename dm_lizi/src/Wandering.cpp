@@ -18,7 +18,7 @@ FSM_BGN
         FSM_CALL_TASK(TurnRandom)
         FSM_TRANSITIONS
         {
-            FSM_ON_EVENT("/PAUSE"", FSM_NEXT(Pause))
+            FSM_ON_EVENT("/PAUSE", FSM_NEXT(Pause))
             FSM_ON_EVENT("/TIMEOUT_TURN", FSM_NEXT(Drive))
             FSM_ON_EVENT("/LEFT_OBSTACLE", FSM_NEXT(Drive))
             FSM_ON_EVENT("/RIGHT_OBSTACLE", FSM_NEXT(Drive))
